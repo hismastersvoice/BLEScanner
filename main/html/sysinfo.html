@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
+
 <body>
     <div class="container">
         <header>
@@ -20,7 +22,7 @@
                 </button>
             </div>
         </header>
-        
+
         <div class="card">
             <h2 class="card-title">Device Information</h2>
             <div class="info-section">
@@ -28,14 +30,18 @@
                     <span class="info-label"><i class="fas fa-microchip"></i> Device:</span>
                     <span id="device" class="info-value">Loading...</span>
                 </div>
-				<div class="info-item">
-					<span class="info-label"><i class="fas fa-fingerprint"></i> Mac Address:</span>
-					<span id="macaddr" class="info-value">Loading...</span>
-				</div>
-				<div class="info-item">
-					<span class="info-label"><i class="fas fa-tags"></i> Firmware:</span>
-					<span id="firmware" class="info-value">Loading...</span>
-				</div>
+                <div class="info-item">
+                    <span class="info-label"><i class="fas fa-fingerprint"></i> Mac Address:</span>
+                    <span id="macaddr" class="info-value">Loading...</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label"><i class="fas fa-tags"></i> Firmware:</span>
+                    <span id="firmware" class="info-value">Loading...</span>
+                </div>
+                <div class="info-item" id="cpu-div">
+                    <span class="info-label"><i class="fas fa-microchip"></i> CPU:</span>
+                    <span id="cpu" class="info-value">Loading...</span>
+                </div>
                 <div class="info-item" id="heap-div">
                     <span class="info-label"><i class="fas fa-memory"></i> Free Heap:</span>
                     <span id="heap" class="info-value">Loading...</span>
@@ -46,7 +52,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="card">
             <h2 class="card-title">Network Information</h2>
             <div class="info-section">
@@ -54,15 +60,15 @@
                     <span class="info-label"><i class="fas fa-wifi"></i> WiFi SSID:</span>
                     <span id="ssid" class="info-value">Loading...</span>
                 </div>
-            </div>
-            <div class="info-section">
-                <div class="info-item">
-                    <span class="info-label"><i class="fas fa-wifi"></i> WiFi RSSI:</span>
-                    <span id="wifi_rssi" class="info-value">Loading...</span>
+                <div class="info-section">
+                    <div class="info-item">
+                        <span class="info-label"><i class="fas fa-wifi"></i> WiFi RSSI:</span>
+                        <span id="wifi_rssi" class="info-value">Loading...</span>
+                    </div>
                 </div>
-            </div>            
+            </div>
         </div>
-        
+
         <div class="card">
             <h2 class="card-title">Tracked Devices</h2>
             <div class="table-responsive">
@@ -72,7 +78,7 @@
                             <th>MAC Address</th>
                             <th>Name</th>
                             <th>RSSI</th>
-							<th>Status</th>
+                            <th>Status</th>
                             <th>Battery</th>
                             <th>Last Battery Read</th>
                         </tr>
@@ -89,16 +95,17 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="refresh-section">
             <button id="refreshBtn" class="btn" onclick="loadData()">
                 <i class="fas fa-sync-alt"></i> Refresh Data
             </button>
         </div>
-        
+
         <footer>
             <p>by Shogunxam</p>
         </footer>
     </div>
 </body>
+
 </html>

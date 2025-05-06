@@ -40,6 +40,8 @@ extern std::vector<BLETrackedDevice> BLETrackedDevices;
 
 #include "ESPUtility.h"
 
+#include "driver/temp_sensor.h"
+
 OTAWebServer::OTAWebServer()
     : server(80),
       dataBuffMutex("OTAWebServer_DataBuffer")
@@ -80,6 +82,14 @@ size_t OTAWebServer::appendAndFlush(uint8_t *dest, size_t buffsize, size_t destS
     totWrote += wrote;
   }
   return destStartPos + wrote;
+}
+
+void initTempSensor()
+{
+  temp_sensor_config_t temp_sensor = TSENS_CONFIG_DEFAULT();
+  temp_sensor.dac_offset = TSENS_DAC_L2; // TSENS_DAC_L2 is default; L4(-40°C ~ 20°C), L2(-10°C ~ 80°C), L1(20°C ~ 100°C), L0(50°C ~ 125°C)
+  temp_sensor_set_config(temp_sensor);
+  temp_sensor_start();
 }
 
 void OTAWebServer::SendDefaulHeaders()
@@ -453,7 +463,6 @@ void OTAWebServer::postUpdateConfig()
       newSettings.serverUser = server.arg(i);
     else if (server.argName(i) == "mqttpwd")
       newSettings.serverPwd = server.arg(i);
-
     else if (server.argName(i) == "mqtttimeout")
       newSettings.mqttTimeout = server.arg(i);
     else if (server.argName(i) == "udpsrvr")
@@ -480,9 +489,8 @@ void OTAWebServer::postUpdateConfig()
       newSettings.netDns = server.arg(i);
     else if (server.argName(i) == "netdns2")
       newSettings.netDns2 = server.arg(i);
-      else if (server.argName(i) == "location")
+    else if (server.argName(i) == "location")
       newSettings.location = server.arg(i);
-
     else if (server.argName(i) == "scanperiod")
       newSettings.scanPeriod = server.arg(i).toInt();
     else if (server.argName(i) == "maxNotAdvPeriod")
@@ -551,6 +559,8 @@ void OTAWebServer::sendSysInfoData(bool trackerInfo, bool deviceList)
 
   CRITICALSECTION_START(dataBuffMutex)
   int wifi_rssi = WiFi.RSSI();
+  float esp_temp = 0;
+  temp_sensor_read_celsius(&esp_temp);
   char strbuff[20];
   server.client().setNoDelay(true);
 
@@ -563,15 +573,47 @@ void OTAWebServer::sendSysInfoData(bool trackerInfo, bool deviceList)
     SendChunkedContent(R"(",)");
     SendChunkedContent(R"("firmware":")" VERSION R"(",)");
 
-#if DEVELOPER_MODE
-    SendChunkedContent(R"("build":")");
-    SendChunkedContent(Firmware::BuildTime);
-    SendChunkedContent(R"(",)");
-    SendChunkedContent(R"("memory":")");
-    itoa(xPortGetFreeHeapSize(), strbuff, 10);
-    SendChunkedContent(strbuff);
-    SendChunkedContent(R"( bytes",)");
-#endif
+    if (SettingsMngr.devEnabled)
+    {
+      SendChunkedContent(R"("build":")");
+      SendChunkedContent(Firmware::BuildTime);
+      SendChunkedContent(R"(",)");
+      SendChunkedContent(R"("cpu":")");
+      char chip_freq[10];
+      char chip_core[10];
+      char cpu_data[50];
+      char flash_size[10];
+      itoa(ESP.getCpuFreqMHz(), chip_freq, 10);
+      itoa(ESP.getChipCores(), chip_core, 10);
+      itoa(ESP.getFlashChipSize(), flash_size, 10);
+      strcpy(cpu_data, ESP.getChipModel());
+      strcat(cpu_data, " @ ");
+      strcat(cpu_data, chip_freq);
+      strcat(cpu_data, " MHz / ");
+      strcat(cpu_data, chip_core);
+      SendChunkedContent(cpu_data);
+      SendChunkedContent(R"( Core/s",)");
+      SendChunkedContent(R"("memory":")");
+      char heap_free[10];
+      char heap_size[10];
+      char heap_min[10];
+      char heap_data[55];
+      itoa(ESP.getFreeHeap(), heap_free, 10);
+      itoa(ESP.getHeapSize(), heap_size, 10);
+      itoa(ESP.getMinFreeHeap(), heap_min, 10);
+      strcpy(heap_data, "Free: ");
+      strcat(heap_data, heap_free);
+      strcat(heap_data, " / Size: ");
+      strcat(heap_data, heap_size);
+      strcat(heap_data, " / Min: ");
+      strcat(heap_data, heap_min);
+      SendChunkedContent(heap_data);
+      SendChunkedContent(R"( bytes",)");
+      SendChunkedContent(R"("esp_temp":")");
+      dtostrf(esp_temp, 5, 1, strbuff);
+      SendChunkedContent(strbuff);
+      SendChunkedContent(R"( °C",)");
+    }
     SendChunkedContent(R"("uptime":")");
     SendChunkedContent(formatMillis(millis(), strbuff));
     SendChunkedContent(R"(",)");

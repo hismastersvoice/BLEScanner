@@ -32,7 +32,6 @@
 // Debug output
 //#define DEBUG_SERIAL
 
-
 #define PUBLISH_BATTERY_LEVEL       true
 
 // MQTT

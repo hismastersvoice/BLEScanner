@@ -53,7 +53,7 @@ $(document).ready(() => {
     formData.append('udpenabled', $('#udpenabled').is(':checked') ? 'true' : '');
     formData.append('dhcpenabled', $('#dhcpenabled').is(':checked') ? 'true' : '');
     formData.append('haenabled', $('#haenabled').is(':checked') ? 'true' : '');
-    
+    formData.append('devenabled', $('#devenabled').is(':checked') ? 'true' : '');
     formData.append('manualscan', $('#manualscan').is(':checked') ? 'true' : '');
     formData.append('whiteList', $('#whiteList').is(':checked') ? 'true' : '');
 
@@ -160,6 +160,9 @@ function PopulatePage(data) {
 
   $('#whiteList').prop('checked', data.whiteList);
   $('#manualscan').prop('checked', data.manualscan);
+  $('#devenabled').prop('checked', data.dev_enabled);
+  $('#haenabled').prop('checked', data.ha_enabled);
+
   
   $('#mqttenabled').prop('checked', data.mqtt_enabled);
   if (data.mqtt_enabled) {
@@ -181,7 +184,7 @@ function PopulatePage(data) {
   } else {
     $("#dhcpenabled_div").removeClass("hidden");
   }
-  $('#haenabled').prop('checked', data.ha_enabled);
+ 
 
   $('#devices-table tbody').empty();
 

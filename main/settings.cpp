@@ -3,7 +3,7 @@
 #include "DebugPrint.h"
 #include "WiFiManager.h" 
 
-#define CURRENT_SETTING_VERSION 9
+#define CURRENT_SETTING_VERSION 10
 
 Settings SettingsMngr;
 
@@ -124,7 +124,6 @@ void Settings::FactoryReset(bool emptyLists)
     haEnabled = ENABLE_HOME_ASSISTANT_MQTT_DISCOVERY;
     devEnabled = DEVELOPER_MODE;
     mqttTimeout = MQTT_CONNECTION_TIME_OUT;
-    location = LOCATION;
 }
 
 std::size_t Settings::GetMaxNumOfTraceableDevices()
@@ -421,12 +420,11 @@ bool Settings::Save()
         SaveString(file, netSub);
         SaveString(file, netGate);
         SaveString(file, netDns);
-
         file.write((uint8_t *)&mqttEnabled, sizeof(mqttEnabled));
         file.write((uint8_t *)&haEnabled, sizeof(haEnabled));
         SaveString(file, mqttTimeout);
-
         SaveString(file, location);
+        file.write((uint8_t *)&devEnabled, sizeof(devEnabled));
         file.flush();
         file.close();
         return true;
@@ -492,6 +490,10 @@ void Settings::Load()
             LoadString(file, mqttTimeout);
             LoadString(file, location);
         }
+        if(currVer > 9)
+        {
+            file.read((uint8_t *)&devEnabled, sizeof(devEnabled));
+        }        
 
         file.close();
     }

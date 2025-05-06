@@ -30,6 +30,7 @@ function updatePage(data) {
   for (const field in fields) {
     let text = data[fields[field]] || ''; // Default to empty string if data is missing
     if (field === 'firmware' && data.build) {
+      text += ' - Build: ';
       text += ` ${data.build}`;
     }
     $(`#${field}`).text(text);
@@ -38,6 +39,19 @@ function updatePage(data) {
   $('#heap-div').toggle(!!data.memory);
   if (data.memory) {
     $('#heap').text(data.memory);
+  }
+
+  $('#cpu-div').toggle(!!data.cpu);
+  let text = '';
+  if (data.cpu) {
+    if (data.esp_temp) {
+      text += ` ${data.cpu}`;
+      text += ' @ ';
+      text += ` ${data.esp_temp}`;
+    } else {
+      text = ` ${data.cpu}`;
+    }
+    $('#cpu').text(text);
   }
 
   const $deviceTable = $('#devices-table');
