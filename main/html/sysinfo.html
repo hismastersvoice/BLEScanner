@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Information - ESP32 BLE Tracker</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="sysinfo.js"></script>
+    <script src="utility.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="title">System Information</h1>
+            <div class="nav-buttons">
+                <button onclick="window.open('/','_self')" class="btn btn-small">
+                    <i class="fas fa-home"></i> Home
+                </button>
+            </div>
+        </header>
+        
+        <div class="card">
+            <h2 class="card-title">Device Information</h2>
+            <div class="info-section">
+                <div class="info-item">
+                    <span class="info-label"><i class="fas fa-microchip"></i> Device:</span>
+                    <span id="device" class="info-value">Loading...</span>
+                </div>
+				<div class="info-item">
+					<span class="info-label"><i class="fas fa-fingerprint"></i> Mac Address:</span>
+					<span id="macaddr" class="info-value">Loading...</span>
+				</div>
+				<div class="info-item">
+					<span class="info-label"><i class="fas fa-tags"></i> Firmware:</span>
+					<span id="firmware" class="info-value">Loading...</span>
+				</div>
+                <div class="info-item" id="heap-div">
+                    <span class="info-label"><i class="fas fa-memory"></i> Free Heap:</span>
+                    <span id="heap" class="info-value">Loading...</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label"><i class="fas fa-clock"></i> Uptime:</span>
+                    <span id="uptime" class="info-value">Loading...</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2 class="card-title">Network Information</h2>
+            <div class="info-section">
+                <div class="info-item">
+                    <span class="info-label"><i class="fas fa-wifi"></i> WiFi SSID:</span>
+                    <span id="ssid" class="info-value">Loading...</span>
+                </div>
+            </div>
+            <div class="info-section">
+                <div class="info-item">
+                    <span class="info-label"><i class="fas fa-wifi"></i> WiFi RSSI:</span>
+                    <span id="wifi_rssi" class="info-value">Loading...</span>
+                </div>
+            </div>            
+        </div>
+        
+        <div class="card">
+            <h2 class="card-title">Tracked Devices</h2>
+            <div class="table-responsive">
+                <table id="devices-table" class="data-table">
+                    <thead>
+                        <tr>
+                            <th>MAC Address</th>
+                            <th>Name</th>
+                            <th>RSSI</th>
+							<th>Status</th>
+                            <th>Battery</th>
+                            <th>Last Battery Read</th>
+                        </tr>
+                    </thead>
+                    <tbody id="devicesTableBody">
+                        <!-- This will be populated by loadData() in sysinfo.js -->
+                        <tr>
+                            <td colspan="6" class="loading-message">Loading device data...</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div id="devices-cards" class="devices-cards" style="display: none;">
+                    <!-- This will be populated by loadData() in sysinfo.js -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="refresh-section">
+            <button id="refreshBtn" class="btn" onclick="loadData()">
+                <i class="fas fa-sync-alt"></i> Refresh Data
+            </button>
+        </div>
+        
+        <footer>
+            <p>by Shogunxam</p>
+        </footer>
+    </div>
+</body>
+</html>
