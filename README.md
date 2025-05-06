@@ -31,6 +31,7 @@ This project allows you to monitor BLE devices with public (non-changing) MAC ad
   - [Web Server](#web-server)
   - [MQTT Integration](#mqtt-integration)
   - [Home Assistant Integration](#home-assistant-integration)
+  - [UDP](#udp-protocol-support)
   - [FHEM Support](#fhem-support)
 - [Tested BLE Devices](#tested-ble-devices)
 - [Troubleshooting](#troubleshooting)
