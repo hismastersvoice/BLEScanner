@@ -1,3 +1,5 @@
+This Code is original from Repository [shogunxam](https://github.com/shogunxam/ESP32_BLETracker) and modified for my on purposes.
+
 # ESP32 BLETracker
 
 A simple solution for tracking Bluetooth Low Energy devices with an ESP32, MQTT protocol, and Home Assistant integration.  
