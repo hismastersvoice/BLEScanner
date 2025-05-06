@@ -1,4 +1,20 @@
 This Code is original from Repository [shogunxam](https://github.com/shogunxam/ESP32_BLETracker) and modified for my on purposes.
+Thanks to shogunxam for the great help.
+
+# Changes
+- Network Settings DHCP or IP/Subnet/Gateway/DNS can be changed in the WebUI
+- location can be changed in the WebUI
+- UDP / MQTT can be used at one time (FHEM still not usable at the same time with MQTT/UDP)
+- UDP / MQTT can be activated/deactivated in the WebUI
+- Home Assistant Discovery can be activated/deactivated
+- MQTT Timeout can be changed in the WebUI
+- UDP IP / Port can be set in the WebUI
+- location can be changed in the WebUI (has impact to MQQT/UDP Topic)
+- SystemInformation shows WiFi RSSI
+- SystemInformation Developemnt shows more Information e.g. Temp / CPU Infos / more Memory Infos
+- Changes in the WebUI. Deactivated div will be hide to get a better overview. Some color changes.
+
+
 
 # ESP32 BLETracker
 
