@@ -11,7 +11,7 @@ Thanks to shogunxam for the great help.
 - UDP IP / Port can be set in the WebUI
 - location can be changed in the WebUI (has impact to MQQT/UDP Topic)
 - SystemInformation shows WiFi RSSI
--  **Next release** SystemInformation Developemnt shows more Information e.g. Temp / CPU Infos / more Memory Infos
+- SystemInformation Developemnt shows more Information e.g. Temp / CPU Infos / more Memory Infos
 - Changes in the WebUI. Deactivated div will be hide to get a better overview. Some color changes.
 - **Next release** OTA download change to offer ready .bin files for ESP32 / ESP32-C3 / ESP32-S3
 

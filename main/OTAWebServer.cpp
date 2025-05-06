@@ -680,8 +680,14 @@ void OTAWebServer::sendSysInfoData(bool trackerInfo, bool deviceList)
         SendChunkedContent(R"(,)");
       }
 #endif
+      
+
+
       SendChunkedContent(R"("state":")");
       SendChunkedContent(trackedDevice.isDiscovered ? "On" : "Off");
+      SendChunkedContent(R"(",)");
+      SendChunkedContent(R"("state_dec":")");
+      SendChunkedContent(trackedDevice.isDiscovered ? "1" : "0");
       SendChunkedContent(R"("})");
     }
     SendChunkedContent("]}");
@@ -757,6 +763,9 @@ void OTAWebServer::getDeviceInfoData()
   // Stato
   SendChunkedContent(R"("state":")");
   SendChunkedContent(targetDevice->isDiscovered ? "On" : "Off");
+  SendChunkedContent(R"(",)");
+  SendChunkedContent(R"("state_dec":")");
+  SendChunkedContent(targetDevice->isDiscovered ? "1" : "0");
   SendChunkedContent(R"(",)");
 
   // RSSI
