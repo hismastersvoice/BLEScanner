@@ -11,7 +11,7 @@ namespace Watchdog
         WatchDogStartTime.store(millis());
         while (true)
         {
-            if (millis() > (WatchDogStartTime.load() + 120000))
+            if (millis() > (WatchDogStartTime.load() + 180000))
             {
                 const char *errMsg = "Error: Watchdog Reboot";
                 DEBUG_PRINTLN(errMsg);

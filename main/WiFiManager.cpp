@@ -35,7 +35,7 @@ namespace WiFiManager
   }
 
   static unsigned long apModeStartTime = 0;
-  static constexpr unsigned long AP_MODE_RECONNECT_TIMEOUT = 60000; // 60 seconds to reconnect to WiFi
+  static constexpr unsigned long AP_MODE_RECONNECT_TIMEOUT = 120000; // 180 seconds to reconnect to WiFi
 
   const char *GetDefaultHostName()
   {
