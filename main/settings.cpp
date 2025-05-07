@@ -3,7 +3,7 @@
 #include "DebugPrint.h"
 #include "WiFiManager.h" 
 
-#define CURRENT_SETTING_VERSION 10
+#define CURRENT_SETTING_VERSION 8
 
 Settings SettingsMngr;
 
@@ -474,9 +474,6 @@ void Settings::Load()
         {
             LoadString(file, wbsUser);
             LoadString(file, wbsPwd);
-        }
-        if(currVer > 8)
-        {
             file.read((uint8_t *)&udpEnabled, sizeof(udpEnabled));
             LoadString(file, udpServer);
             file.read((uint8_t *)&udpPort, sizeof(udpPort));
@@ -489,9 +486,6 @@ void Settings::Load()
             file.read((uint8_t *)&haEnabled, sizeof(haEnabled));
             LoadString(file, mqttTimeout);
             LoadString(file, location);
-        }
-        if(currVer > 9)
-        {
             file.read((uint8_t *)&devEnabled, sizeof(devEnabled));
         }        
 

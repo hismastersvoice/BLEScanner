@@ -30,7 +30,7 @@
 #define MAX_BLE_CONNECTION_RETRIES 3
 
 // Debug output
-//#define DEBUG_SERIAL
+#define DEBUG_SERIAL
 
 #define PUBLISH_BATTERY_LEVEL       true
 
