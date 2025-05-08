@@ -623,7 +623,7 @@ void OTAWebServer::sendSysInfoData(bool trackerInfo, bool deviceList)
     SendChunkedContent(R"("wifi_rssi":")");
     itoa(wifi_rssi, strbuff, 10);
     SendChunkedContent(strbuff);
-    SendChunkedContent(R"( dBm",)");
+    SendChunkedContent(R"(",)");
     SendChunkedContent(R"("macaddr":")");
     SendChunkedContent(WiFi.macAddress().c_str());
     SendChunkedContent(R"(",)");
