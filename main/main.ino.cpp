@@ -1,4 +1,4 @@
-# 1 "C:\\Users\\dieter\\AppData\\Local\\Temp\\tmp9dfwpked"
+# 1 "C:\\Users\\dieter\\AppData\\Local\\Temp\\tmpc_cixp40"
 #include <Arduino.h>
 # 1 "E:/BLEScanner/main/main.ino"
 #include "main.h"
@@ -674,5 +674,5 @@ void loop()
     LOG_TO_FILE_E(errMsg);
   }
 
-  delay(100);
+  delay(WiFiManager::IsAccessPointModeOn() ? 300 : 100);
 }

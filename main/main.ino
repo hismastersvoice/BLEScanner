@@ -663,5 +663,5 @@ void loop()
     LOG_TO_FILE_E(errMsg);
   }
 
-  delay(100);
+  delay(WiFiManager::IsAccessPointModeOn() ? 300 : 100);
 }

@@ -27,8 +27,6 @@ function updatePage(data) {
     macaddr: 'macaddr',
   };
 
-  //<i class="fas fa-check-circle" style="color:green"></i>
-
   for (const field in fields) {
     let text = data[fields[field]] || ''; // Default to empty string if data is missing
     if (field === 'firmware' && data.build) {
@@ -45,11 +43,11 @@ function updatePage(data) {
     } else if (data.wifi_rssi > -70) {
       $('#wifi_rssi').html('<i class="fas fa-signal" style="color:#00e600"></i>&nbsp;&nbsp;' + data.wifi_rssi + ' dbm ');
     } else if (data.wifi_rssi > -80) {
-      $('#wifi_rssi').html('<i class="fas fa-signal" style="color:#ff9900"></i>&nbsp;&nbsp;' + data.wifi_rssi + ' dbm ');
+      $('#wifi_rssi').html('<i class="fas fa-signal" style="color:#fd9126"></i>&nbsp;&nbsp;' + data.wifi_rssi + ' dbm ');
     } else if (data.wifi_rssi > -90) {
-      $('#wifi_rssi').html('<i class="fas fa-signal" style="color:#fb7b50"></i>&nbsp;&nbsp;' + data.wifi_rssi + ' dbm ');
+      $('#wifi_rssi').html('<i class="fas fa-signal" style="color:#fd5c26"></i>&nbsp;&nbsp;' + data.wifi_rssi + ' dbm ');
     } else {
-      $('#wifi_rssi').html('<i class="fas fa-signal" style="color:#ff0000"></i>&nbsp;&nbsp;' + data.wifi_rssi + ' dbm ');
+      $('#wifi_rssi').html('<i class="fas fa-signal" style="color:#fd2626"></i>&nbsp;&nbsp;' + data.wifi_rssi + ' dbm ');
     }
   } else {
     text('N/A');
@@ -171,7 +169,7 @@ const loadData = () => {
     null,
     updatePage,
     (xhr, status, error) => {
-      console.error('Errore nel caricamento dei dati:', status, error);
+      console.error('Error loading data:', status, error);
     }
   );
 };
