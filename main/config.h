@@ -17,7 +17,7 @@
 #define BLE_SCANNING_PERIOD   10    /*10 s*/
 
 //If the device is not advertides for MAX_NON_ADV_PERIOD seconds it's considered away
-#define MAX_NON_ADV_PERIOD    120 /*2m -> 2m*60s*/
+#define MAX_NON_ADV_PERIOD    30 /*2m -> 2m*60s*/
 
 //The device's battery is read every BATTERY_READ_PERIOD seconds
 //If the battery value's is not read after BATTERY_READ_PERIOD it becomes unknown
