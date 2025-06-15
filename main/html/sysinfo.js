@@ -53,20 +53,59 @@ function updatePage(data) {
     text('N/A');
   }
 
-  $('#heap-div').toggle(!!data.memory);
-  if (data.memory) {
-    $('#heap').text(data.memory);
+  $('#sdk-div').toggle(!!data.sdk_version);
+  if (data.sdk_version) {
+    $('#sdk').text(data.sdk_version);
   }
 
-  $('#cpu-div').toggle(!!data.cpu);
-  let text = '';
-  if (data.cpu) {
+  $('#heap-div').toggle(!!data.heap_total);
+  if (data.heap_total) {
+    var hfree = ` ${data.heap_free / 1000}`;
+    let hfree_r = Math.round(hfree * 100) / 100;
+    var hused = ` ${data.heap_used / 1000}`;
+    let hused_r = Math.round(hused * 100) / 100;
+    var htotal = ` ${data.heap_total / 1000}`;
+    let htotal_r = Math.round(htotal * 100) / 100;
+    let text = '';
+    text += ' Free: ';
+    text += ` ${hfree_r}`;
+    text += ' Kb / Used: ';
+    text += ` ${hused_r}`;
+    text += ' Kb / Total: ';
+    text += ` ${htotal_r}`;
+    text += ' Kb';
+    $('#heap').text(text);
+  }
+
+  $('#flash-div').toggle(!!data.flashsize);
+  if (data.flashsize) {
+    var flahsize = ` ${data.flashsize / 1000}`;
+    let flashsize_r = Math.round(flahsize * 100) / 100;
+    let text = '';
+    text += ` ${flashsize_r}`;
+    text += ' Kb';
+    $('#flash').text(text);
+  }
+
+  $('#cpu-div').toggle(!!data.chip);
+  if (data.chip) {
+    let text = '';
+    text += ` ${data.chip}`;
+    text += ' / Rev: ';
+    text += ` ${data.chip_revision}`;
+    text += ' / ';
+    text += ` ${data.chip_freq}`;
+    text += ' MHz / ';
+    text += ` ${data.chip_core}`;
+    if (data.cores > 1) {
+      text += ' Cores ';
+    } else {
+      text += ' Core ';
+    }
     if (data.esp_temp) {
-      text += ` ${data.cpu}`;
       text += ' @ ';
       text += ` ${data.esp_temp}`;
-    } else {
-      text = ` ${data.cpu}`;
+      text += ' °C ';
     }
     $('#cpu').text(text);
   }

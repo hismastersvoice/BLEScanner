@@ -13,7 +13,6 @@ Thanks to shogunxam for the great help.
 - SystemInformation shows WiFi RSSI
 - SystemInformation Developemnt shows more Information e.g. Temp / CPU Infos / more Memory Infos
 - Changes in the WebUI. Deactivated div will be hide to get a better overview. Some color changes.
-- **Next release** OTA download change to offer ready .bin files for ESP32 / ESP32-C3 / ESP32-S3
 
 
 
