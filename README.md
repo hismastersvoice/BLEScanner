@@ -16,6 +16,15 @@ Thanks to shogunxam for the great help.
 
 
 
+
+
+
+__________________________________________________
+
+
+
+
+
 # ESP32 BLETracker
 
 A simple solution for tracking Bluetooth Low Energy devices with an ESP32, MQTT protocol, and Home Assistant integration.  
